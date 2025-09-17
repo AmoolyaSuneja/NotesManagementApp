@@ -76,15 +76,49 @@ NODE_ENV=development
 ```
 
 #### MongoDB Setup
-**Option 1: Local MongoDB**
-- Install MongoDB locally
-- Start MongoDB service
-- The default connection string `mongodb://localhost:27017/notes-manager` should work
+
+**🚀 Quick Setup (Windows)**
+1. Run the setup script:
+   ```bash
+   setup-mongodb.bat
+   ```
+   This will:
+   - Create the `.env` file
+   - Set up the data directory
+   - Start MongoDB service
+   - Verify the connection
+
+**Option 1: Local MongoDB (Manual Setup)**
+1. **Install MongoDB Community Server**
+   - Download from [MongoDB Download Center](https://www.mongodb.com/try/download/community)
+   - Install with default settings
+   - MongoDB will be installed at: `C:\Program Files\MongoDB\Server\8.2\bin\`
+
+2. **Create Data Directory**
+   ```bash
+   mkdir C:\data\db
+   ```
+
+3. **Start MongoDB**
+   ```bash
+   "C:\Program Files\MongoDB\Server\8.2\bin\mongod.exe" --dbpath "C:\data\db"
+   ```
+
+4. **Verify Installation**
+   ```bash
+   check-mongodb.bat
+   ```
 
 **Option 2: MongoDB Atlas (Cloud)**
 - Create a free account at [MongoDB Atlas](https://www.mongodb.com/atlas)
 - Create a new cluster
 - Get your connection string and update `MONGODB_URI` in `.env`
+
+**🔧 Troubleshooting MongoDB**
+- Run `check-mongodb.bat` to diagnose issues
+- Ensure MongoDB is running: `tasklist | findstr mongod`
+- Check if port 27017 is available
+- Run setup scripts as administrator if needed
 
 ### 4. Run the Application
 
@@ -202,8 +236,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Common Issues
 
 1. **MongoDB Connection Error**
-   - Ensure MongoDB is running
+   - Run `check-mongodb.bat` to diagnose the issue
+   - Ensure MongoDB is running: `tasklist | findstr mongod`
    - Check your connection string in `.env`
+   - Verify MongoDB is installed at: `C:\Program Files\MongoDB\Server\8.2\bin\`
+   - Try running `setup-mongodb.bat` as administrator
 
 2. **Port Already in Use**
    - Change the port in `backend/.env`
